@@ -1,0 +1,11 @@
+{
+  "name": "react-blueprints",
+  "version": "1.0.0",
+  "description": "React Quick Starter",
+  "main": "index.html",
+  "scripts": {
+  "start": "node server.js"
+  },
+  "author": "mr-tesla",
+  "license": "MIT"
+}
