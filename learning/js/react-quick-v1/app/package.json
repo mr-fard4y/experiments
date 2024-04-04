@@ -4,8 +4,11 @@
   "description": "React Quick Starter",
   "main": "index.html",
   "scripts": {
-  "start": "node server.js"
+    "start": "node server.js"
   },
   "author": "mr-tesla",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "express": "^4.13.4"
+  }
 }

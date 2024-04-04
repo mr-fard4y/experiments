@@ -16,10 +16,19 @@ node -v # should print `v20.12.1`
 npm -v # should print `10.5.0`
 ```
 
+Install all packages
 
+```
+npm install
+```
+
+
+Install step-by-step
 
 ```bash
 
 npm install express --save-dev
 
 ```
+
+###
