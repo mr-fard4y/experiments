@@ -2,6 +2,9 @@
 main*.py
 node_modules
 env
+venv
+
+filtered_data.csv
 
 *.pyc
 
