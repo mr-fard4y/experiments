@@ -5,6 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 async def hello() -> dict:
-    return {
-            "data": "Hello friend"
-    }
+    return {"data": "Hello friend"}
