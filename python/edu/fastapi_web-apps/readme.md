@@ -40,9 +40,23 @@ curl http://0.0.0.0:8000/api/v1
 curl -X "GET" http://0.0.0.0:8000/api/v1/items \
   -H "accept: application/json"
 
+curl -X "GET" http://0.0.0.0:8000/api/v1/items/1 \
+  -H "accept: application/json"
+
 curl -X "POST" http://0.0.0.0:8000/api/v1/items \
   -H "accept: application/json" \
   -H "Content-Type: application/json" \
   -d '{"id": 1, "data": "Example with text"}'
+
+curl -X "PUT" http://0.0.0.0:8000/api/v1/items/1 \
+  -H "accept: application/json" \
+  -H "Content-Type: application/json" \
+  -d '{"data": "Updated data"}'
+
+curl -X "DELETE" http://0.0.0.0:8000/api/v1/items \
+  -H "accept: application/json"
+
+curl -X "DELETE" http://0.0.0.0:8000/api/v1/items/1 \
+  -H "accept: application/json"
 
 ```
