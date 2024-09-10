@@ -1,20 +1,5 @@
-from fastapi import FastAPI, APIRouter, Path
-from pydantic import BaseModel
-
-
-class NoteItem(BaseModel):
-    id: int
-    data: str
-
-    class Config:
-        schema_extra = {"examples": [{"id": 1, "data": "Text data"}]}
-
-
-class NoteItemUpdate(BaseModel):
-    data: str
-
-    class Config:
-        schema_extra = {"examples": [{"data": "Updated text data"}]}
+from fastapi import APIRouter, Path
+from models import NoteItem, NoteItemUpdate
 
 
 DATABASE: list[NoteItem] = []
@@ -71,18 +56,3 @@ async def remove_item(item_id: int) -> dict:
             DATABASE.pop(idx)
             return {"result": "Item has removed successfully"}
     return {"result": "Item doesn't exist"}
-
-
-app = FastAPI()
-app.include_router(router)
-
-
-@app.get("/")
-async def health_check() -> dict:
-    return {"status": "OK"}
-
-
-if __name__ == "__main__":
-    import uvicorn
-
-    uvicorn.run("notes-api:app", host="127.0.0.1", port=8000, reload=True)
