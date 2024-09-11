@@ -1,5 +1,5 @@
-from fastapi import APIRouter, Path
-from models import NoteItem, NoteItemUpdate
+from fastapi import APIRouter, Path, HTTPException, status
+from models import NoteItem, NoteItemUpdate, NoteItemsResponse
 
 
 DATABASE: list[NoteItem] = []
@@ -13,7 +13,7 @@ async def get_version() -> dict:
     return {"version": "v1"}
 
 
-@router.get("/items")
+@router.get("/items", response_model=NoteItemsResponse)
 async def get_all_data() -> dict:
     return {"data": DATABASE}
 
@@ -23,10 +23,12 @@ async def retrieve_item(item_id: int = Path(..., title="Item ID")) -> dict:
     for item in DATABASE:
         if item.id == item_id:
             return {"data": item}
-    return {"result": "Item doesn't exist"}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="Item doesn't exist"
+    )
 
 
-@router.post("/items")
+@router.post("/items", status_code=status.HTTP_201_CREATED)
 async def create_item(item: NoteItem) -> dict:
     DATABASE.append(item)
     return {"result": "Item has added successfully"}
@@ -40,7 +42,9 @@ async def update_item(
         if item.id == item_id:
             item.data = item_data.data
             return {"result": "Item has updated successfully"}
-    return {"result": "Item doesn't exist"}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="Item doesn't exist"
+    )
 
 
 @router.delete("/items")
@@ -55,4 +59,6 @@ async def remove_item(item_id: int) -> dict:
         if item.id == item_id:
             DATABASE.pop(idx)
             return {"result": "Item has removed successfully"}
-    return {"result": "Item doesn't exist"}
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND, detail="Item doesn't exist"
+    )
