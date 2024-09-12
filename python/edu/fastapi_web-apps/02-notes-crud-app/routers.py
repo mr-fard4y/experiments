@@ -13,12 +13,12 @@ async def get_version() -> dict:
     return {"version": "v1"}
 
 
-@router.get("/items", response_model=NoteItemsResponse)
+@router.get("/notes", response_model=NoteItemsResponse)
 async def get_all_data() -> dict:
     return {"data": DATABASE}
 
 
-@router.get("/items/{item_id}")
+@router.get("/notes/{item_id}")
 async def retrieve_item(item_id: int = Path(..., title="Item ID")) -> dict:
     for item in DATABASE:
         if item.id == item_id:
@@ -28,13 +28,13 @@ async def retrieve_item(item_id: int = Path(..., title="Item ID")) -> dict:
     )
 
 
-@router.post("/items", status_code=status.HTTP_201_CREATED)
+@router.post("/notes", status_code=status.HTTP_201_CREATED)
 async def create_item(item: NoteItem) -> dict:
     DATABASE.append(item)
     return {"result": "Item has added successfully"}
 
 
-@router.put("/items/{item_id}")
+@router.put("/notes/{item_id}")
 async def update_item(
     item_data: NoteItemUpdate, item_id: int = Path(..., title="Item ID")
 ) -> dict:
@@ -47,13 +47,13 @@ async def update_item(
     )
 
 
-@router.delete("/items")
+@router.delete("/notes")
 async def clear_db() -> dict:
     DATABASE.clear()
     return {"result": "All items have removed successfully"}
 
 
-@router.delete("/items/{item_id}")
+@router.delete("/notes/{item_id}")
 async def remove_item(item_id: int) -> dict:
     for idx, item in enumerate(DATABASE):
         if item.id == item_id:

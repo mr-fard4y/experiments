@@ -1,13 +1,18 @@
+from fastapi import Form
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class NoteItem(BaseModel):
-    id: int
+    id: Optional[int]
     data: str
 
     class Config:
         schema_extra = {"examples": [{"id": 1, "data": "Text data"}]}
+
+    @classmethod
+    def as_form(cls, description: str = Form(...)):
+        return cls(data=description)
 
 
 class NoteItemUpdate(BaseModel):

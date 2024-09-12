@@ -1,0 +1,51 @@
+{% extends "index.html" %}
+
+{% block notes_container %}
+<main class="container">
+    <hr>
+
+    <section class="container-fluid">
+        <form method="post">
+            <div class="col-auto">
+                <div class="input-group mb-3">
+                    <input aria-describedby="button-addon2" aria-label="Add a note" class="form-control" name="description"
+                           placeholder="Enter new note description" type="text"
+                           value="{{ description }}"/>
+                    <button class="btn btn-outline-primary" data-mdb-ripple-color="dark" id="button-addon2"
+                            type="submit">
+                        Add Note
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+
+    {% if item_info %}
+        <article class="card container-fluid">
+            <br/>
+            <h4>Todo ID: {{ item_info.id }} </h4>
+            <p>
+                <strong>
+                    Item: {{ item_info.data }}
+                </strong>
+            </p>
+        </article>
+    {% else %}
+        <section class="container-fluid">
+            <h2 align="center">Notes</h2>
+            <br>
+            <div class="card">
+                <ul class="list-group list-group-flush">
+                    {% for item in items %}
+                    <li class="list-group-item">
+                        {{ loop.index }}. <a href="/notes/{{ item.id }}"> {{ item.data }} </a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+         </section>
+    {% endif %}
+
+</main>
+{% endblock %}
