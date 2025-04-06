@@ -2,6 +2,7 @@
 main*.py
 node_modules
 env
+venv
 
 *.pyc
 
