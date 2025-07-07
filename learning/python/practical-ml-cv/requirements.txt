@@ -1,0 +1,12 @@
+tensorflow
+tf-explain
+
+notebook
+
+keras
+keras-vis
+numpy
+matplotlib
+pillow
+pathlib
+opencv-python
